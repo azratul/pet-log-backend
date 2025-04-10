@@ -7,7 +7,14 @@ const cors = require('cors');
 const helmet = require("helmet");
 const RateLimit = require("express-rate-limit");
 
-const conn = process.env.DATABASE_URL;
+const {
+  MONGO_HOST,
+  MONGO_PORT,
+  MONGO_USER,
+  MONGO_PASS
+} = process.env;
+
+const conn = `mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}:${MONGO_PORT}`;
 
 const { checkApiKey } = require('./middlewares/auth-handler');
 const { errorHandler, boomErrorHandler } = require('./middlewares/error-handler');
@@ -30,7 +37,7 @@ const port = 3000;
 
 require('./utils/auth');
 
-const whitelist = ["http://localhost:3000", "http://localhost:5173"];
+const whitelist = ["http://localhost", "http://localhost:5173", "http://petlog-frontend"];
 
 const options = {
 	origin: (origin, callback) => {

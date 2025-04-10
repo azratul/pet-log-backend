@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petlog-backend
+  labels:
+    app: petlog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: petlog
+  template:
+    metadata:
+      labels:
+        app: petlog
+    spec:
+      containers:
+        - name: backend
+          image: gchr.io/azratul/petlog-backend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_HOST
+            - name: MONGO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_PORT
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_USER
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_PASS
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: petlog-secrets
+                  key: API_KEY
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: petlog-secrets
+                  key: JWT_SECRET
+            - name: JWT_REFRESH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: petlog-secrets
+                  key: JWT_REFRESH_SECRET
