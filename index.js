@@ -37,7 +37,7 @@ const port = 3000;
 
 require('./utils/auth');
 
-const whitelist = ["http://localhost", "http://localhost:5173", "http://petlog-frontend"];
+const whitelist = ["https://petlog.unnerv.xyz", "http://localhost:3000", "http://petlog-frontend"];
 
 const options = {
 	origin: (origin, callback) => {
@@ -55,7 +55,7 @@ const limiter = RateLimit({
   max: 25,
 });
 
-app.set('trust proxy', true);
+app.set('trust proxy', 2);
 
 app.use(express.json());
 app.use(cookieParser());
