@@ -14,7 +14,7 @@ const {
   MONGO_PASS
 } = process.env;
 
-const conn = `mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}:${MONGO_PORT}`;
+const conn = `mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}:${MONGO_PORT}/petlog?authSource=admin`;
 
 const { checkApiKey } = require('./middlewares/auth-handler');
 const { errorHandler, boomErrorHandler } = require('./middlewares/error-handler');
