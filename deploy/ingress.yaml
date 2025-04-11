@@ -1,25 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: petlog-ingress
+  name: petlog-backend
+  namespace: petlog
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-    - host: petlog.unnerv.xyz
+    - host: petlog.kubernetes.lan
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: petlog-frontend-service
-                port:
-                  number: 80
-          - path: /api/v1/
-            pathType: Prefix
-            backend:
-              service:
-                name: petlog-backend-service
+                name: petlog-backend
                 port:
                   number: 80

@@ -2,17 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: petlog-backend
+  namespace: petlog
   labels:
-    app: petlog
+    app: petlog-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: petlog
+      app: petlog-backend
   template:
     metadata:
       labels:
-        app: petlog
+        app: petlog-backend
     spec:
       containers:
         - name: backend
