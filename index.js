@@ -55,6 +55,8 @@ const limiter = RateLimit({
   max: 25,
 });
 
+app.set('trust proxy', true);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(options));
